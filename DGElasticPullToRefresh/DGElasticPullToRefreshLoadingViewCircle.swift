@@ -110,8 +110,8 @@ open class DGElasticPullToRefreshLoadingViewCircle: DGElasticPullToRefreshLoadin
     
     override open func stopLoading() {
         super.stopLoading()
+        self.shapeLayer.removeAnimation(forKey: self.kRotationAnimation)
         
-        shapeLayer.removeAnimation(forKey: kRotationAnimation)
     }
     
     fileprivate func currentDegree() -> CGFloat {
