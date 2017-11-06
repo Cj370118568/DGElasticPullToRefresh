@@ -211,6 +211,10 @@ open class DGElasticPullToRefreshView: UIView {
         return superview as? UIScrollView
     }
     
+    func getState() -> DGElasticPullToRefreshState {
+        return state
+    }
+    
     func stopLoading() {
         // Prevent stop close animation
         if state == .animatingToStopped {

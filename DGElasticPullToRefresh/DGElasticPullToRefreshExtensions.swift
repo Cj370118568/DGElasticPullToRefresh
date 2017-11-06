@@ -87,7 +87,7 @@ public extension UIScrollView {
         static var pullToRefreshView = "pullToRefreshView"
     }
 
-    fileprivate var pullToRefreshView: DGElasticPullToRefreshView? {
+    public var pullToRefreshView: DGElasticPullToRefreshView? {
         get {
             return objc_getAssociatedObject(self, &dg_associatedKeys.pullToRefreshView) as? DGElasticPullToRefreshView
         }
@@ -98,6 +98,10 @@ public extension UIScrollView {
     }
     
     // MARK: - Methods (Public)
+    
+    public func getState() -> DGElasticPullToRefreshState? {
+        return pullToRefreshView?.getState()
+    }
     
     public func dg_addPullToRefreshWithActionHandler(_ actionHandler: @escaping () -> Void, loadingView: DGElasticPullToRefreshLoadingView?) {
         isMultipleTouchEnabled = false
@@ -113,9 +117,12 @@ public extension UIScrollView {
     }
     
     public func dg_removePullToRefresh() {
-        pullToRefreshView?.disassociateDisplayLink()
-        pullToRefreshView?.observing = false
-        pullToRefreshView?.removeFromSuperview()
+        if pullToRefreshView != nil {
+            pullToRefreshView?.disassociateDisplayLink()
+            pullToRefreshView?.observing = false
+            pullToRefreshView?.removeFromSuperview()
+        }
+        
     }
     
     public func dg_setPullToRefreshBackgroundColor(_ color: UIColor) {
